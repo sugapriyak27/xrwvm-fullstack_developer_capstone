@@ -61,6 +61,11 @@ img{
   flex:1
 }
 
+address {
+    margin-top: 1rem;
+    font-style: normal;
+}
+
 .form_panel {
   padding:2%;
   display: flex;
