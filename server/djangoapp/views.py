@@ -89,8 +89,7 @@ def get_cars(request):
         cars.append({"CarModel": car_model.name, "CarMake": car_model.car_make.name})
     return JsonResponse({"CarModels":cars})
 
-# # Update the `get_dealerships` view to render the index page with
-# a list of dealerships
+#Update the `get_dealerships` render list of dealerships all by default, particular state if state is passed
 #Update the `get_dealerships` render list of dealerships all by default, particular state if state is passed
 def get_dealerships(request, state="All"):
     if(state == "All"):
@@ -110,6 +109,15 @@ def get_dealer_details(request, dealer_id):
     else:
         return JsonResponse({"status":400,"message":"Bad Request"})
 
+def post_review(data_dict):
+    request_url = backend_url+"/insert_review"
+    try:
+        response = requests.post(request_url,json=data_dict)
+        print(response.json())
+        return response.json()
+    except:
+        print("Network exception occurred")
+        
 # Create a `add_review` view to submit a review
 def add_review(request):
     if(request.user.is_anonymous == False):
@@ -130,8 +138,9 @@ def get_dealer_reviews(request, dealer_id):
         reviews = get_request(endpoint)
         for review_detail in reviews:
             response = analyze_review_sentiments(review_detail['review'])
-            print(response,reviews)
+            print(response)
             review_detail['sentiment'] = response['sentiment']
         return JsonResponse({"status":200,"reviews":reviews})
     else:
         return JsonResponse({"status":400,"message":"Bad Request"})
+
