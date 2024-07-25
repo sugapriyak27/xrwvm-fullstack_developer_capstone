@@ -81,13 +81,18 @@ def registration(request):
 def get_cars(request):
     count = CarMake.objects.filter().count()
     print(count)
-    if(count == 0):
+    if (count == 0):
         initiate()
     car_models = CarModel.objects.select_related('car_make')
     cars = []
     for car_model in car_models:
-        cars.append({"CarModel": car_model.name, "CarMake": car_model.car_make.name})
-    return JsonResponse({"CarModels":cars})
+        cars.append(
+            {
+                "CarModel": car_model.name,
+                "CarMake": car_model.car_make.name
+            }
+        )
+    return JsonResponse({"CarModels": cars})
 
 #Update the `get_dealerships` render list of dealerships all by default, particular state if state is passed
 #Update the `get_dealerships` render list of dealerships all by default, particular state if state is passed
@@ -108,15 +113,6 @@ def get_dealer_details(request, dealer_id):
         return JsonResponse({"status":200,"dealer":dealership})
     else:
         return JsonResponse({"status":400,"message":"Bad Request"})
-
-def post_review(data_dict):
-    request_url = backend_url+"/insert_review"
-    try:
-        response = requests.post(request_url,json=data_dict)
-        print(response.json())
-        return response.json()
-    except:
-        print("Network exception occurred")
         
 # Create a `add_review` view to submit a review
 def add_review(request):
