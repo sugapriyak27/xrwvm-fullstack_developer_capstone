@@ -13,9 +13,9 @@ class Migration(migrations.Migration):
             name='CarMake',
             fields=[
                 (
-                    'name', 
+                    'name',
                     models.CharField(
-                        max_length=100, 
+                        max_length=100,
                         primary_key=True,
                         serialize=False
                     )
@@ -27,44 +27,45 @@ class Migration(migrations.Migration):
             name='CarModel',
             fields=[
                 (
-                    'id', 
+                    'id',
                     models.BigAutoField(
-                        auto_created=True, 
-                        primary_key=True, 
-                        serialize=False, 
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
                         verbose_name='ID'
                     )
                 ),
                 ('name', models.CharField(max_length=100)),
                 (
-                    'type', 
+                    'type',
                     models.CharField(
                         choices=[
-                            ('SEDAN', 'Sedan'), 
-                            ('SUV', 'SUV'), 
+                            ('SEDAN', 'Sedan'),
+                            ('SUV', 'SUV'),
                             ('WAGON', 'Wagon')
-                        ], 
-                        default='SUV', 
+                        ],
+                        default='SUV',
                         max_length=100
                     )
                 ),
                 (
-                    'year', 
+                    'year',
                     models.IntegerField(
-                        default=2024, 
+                        default=2024,
                         validators=[
-                            django.core.validators.MaxValueValidator(2024), 
+                            django.core.validators.MaxValueValidator(2024),
                             django.core.validators.MinValueValidator(2015)
                         ]
                     )
                 ),
                 (
-                    'car_make', 
+                    'car_make',
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, 
+                        on_delete=django.db.models.deletion.CASCADE,
                         to='djangoapp.carmake'
                     )
                 ),
             ],
         ),
     ]
+]
