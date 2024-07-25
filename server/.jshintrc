@@ -1,0 +1,8 @@
+{
+  "esversion": 8,
+  "globals": {
+    "jQuery": true,
+    "$": true
+  },
+  "node": true
+}
